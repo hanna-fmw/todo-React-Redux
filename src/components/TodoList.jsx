@@ -3,8 +3,9 @@ import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addTodo, deleteTodo, toggleTodo } from '../redux/todoSlice'
 import TodoItem from './TodoItem'
-import tasks from '../tasks.png'
+// import tasks from '../tasks.png'
 import '../App.css'
+import { RxAvatar } from 'react-icons/rx'
 
 function TodoList() {
 	const [userInput, setUserInput] = useState('')
@@ -38,10 +39,13 @@ function TodoList() {
 	}
 
 	return (
-		<div class='container'>
-			<img src={tasks} />
+		<div className='container'>
+			<h2>Todo List</h2>
+			<div className='avatar'>
+				<RxAvatar size={28} />
+			</div>
 
-			<div class='todo-header'>
+			<div>
 				<textarea
 					spellCheck='false'
 					type='text'
@@ -52,16 +56,18 @@ function TodoList() {
 					className='input-value'
 					maxlength='90'
 				/>
-				<button onClick={handleOnClick} type='button' class='add-btn'>
+				<button onClick={handleOnClick} type='button' className='add-btn'>
 					Add
 				</button>
 			</div>
 
-			{todos.map((todo) => (
-				<div key={todo.id} class='todo-list'>
-					<TodoItem todo={todo} onDelete={handleDelete} onToggle={handleToggle} />
-				</div>
-			))}
+			<div className='todo-list'>
+				{todos.map((todo) => (
+					<div key={todo.id}>
+						<TodoItem todo={todo} onDelete={handleDelete} onToggle={handleToggle} />
+					</div>
+				))}
+			</div>
 
 			<footer className='footer'>
 				<span className='footer-txt'>Stay Organized</span>
